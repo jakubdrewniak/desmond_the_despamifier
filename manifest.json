@@ -1,12 +1,15 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Desmond the Despamifier",
   "description": "Desmond the Despamifier will filter all duplicates on auction site listing",
   "version": "1.0",
 
-  "browser_action": {
-    "default_popup": "popup.html"
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "background.js"
   },
-  "permissions": ["activeTab"]
+  "action": {
+    "default_popup": "popup.html"
+  }
 }
