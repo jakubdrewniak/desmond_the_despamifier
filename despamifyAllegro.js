@@ -1,10 +1,8 @@
 
 (function despamifyAllegro() {
-    const sections = getOffersListsSections()
-    sections.forEach(section => {
-        const list = section.getElementsByTagName('article')
-        removeDuplicates(Array.from(list))
-    })
+    const offers = getOffersList()
+    removeDuplicates(offers)
+    window.scrollTo({ top: 0 });
 })()
 
 function removeDuplicates(offersList) {
@@ -15,18 +13,25 @@ function removeDuplicates(offersList) {
             .firstChild
             .innerText
         if (titles.some(t => t === offerTitle)) {
-            offer.remove()
+            hideElement(offer)
         } else {
             titles.push(offerTitle)
         }
     })
 }
 
-function getOffersListsSections() {
-    return Array.from(
-        document
-            .body
-            .getElementsByClassName('opbox-listing')[0]
-            .getElementsByTagName('section')
-    )
+function getOffersList() {
+    return Array.from(document.querySelectorAll('[data-item=true]'))
+}
+
+function hideElement(element) {
+    element.style.cssText =
+        `
+    background-color: red !important;
+    height: 2px !important;
+    overflow: hidden !important;
+    margin: 2px 0 0 0 !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    `
 }
